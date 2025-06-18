@@ -210,8 +210,10 @@ in
       The listed plugins will not be installed.
     '';
 
-    home.packages = lib.mkIf (cfg.package != null) (
-      [ cfg.package ] ++ lib.optionals (cfg.plugins != [ ]) cfg.plugins
+    home.packages = lib.mkIf (cfg.package != null) [ cfg.package ];
+
+    home.extraDependencies = lib.mkIf (cfg.package != null) (
+      lib.optionals (cfg.plugins != [ ]) cfg.plugins
     );
 
     home.file = lib.mkMerge [

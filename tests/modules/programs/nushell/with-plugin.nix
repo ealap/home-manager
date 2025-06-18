@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   realPkgs,
   config,
@@ -26,7 +27,7 @@
       pluginConfig=$(_abs ${pluginConfig})
       pluginFormatsFilename=$(_abs ${realPkgs.nushellPlugins.formats})/bin/nu_plugin_formats
 
-      ${realPkgs.nushell}/bin/nu \
+      ${lib.getExe realPkgs.nushell} \
         --plugin-config $pluginConfig \
         ${./with-plugin/get-plugin-info.nu} "formats" $out
 
